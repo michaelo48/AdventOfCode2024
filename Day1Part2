@@ -1,0 +1,19 @@
+left_values = []
+right_values = []
+
+with open('Inputs/AdventOfCode1.txt', 'r') as file:
+    for line in file:
+        left, right = line.strip().split()
+        left_values.append(int(left))
+        right_values.append(int(right))
+        
+def calculate_similarity_score(left_values, right_values):
+    right_counts = {}
+    for num in right_values:
+        right_counts[num] = right_counts.get(num, 0) + 1
+    total_score = 0
+    for left_num in left_values:
+        count_in_right = right_counts.get(left_num, 0)
+        total_score += left_num * count_in_right
+    return total_score
+print(calculate_similarity_score(left_values, right_values))
